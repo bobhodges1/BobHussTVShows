@@ -1,12 +1,29 @@
-<%- include("../partials/header.ejs", {title: "Main Page"}) %>
+<%- include("../partials/header.ejs", {title: "Game of Thrones Episodes"}) %>
 
 
-<p>This content comes from <code>/views/pages/index.ejs</code></p>
 
 <section>
-  <p><a href="/db-test">Clicking this link will test to see if your db connection is ok</a></p>
+  <!-- <p><a href="/db-test">Clicking this link will test to see if your db connection is ok</a></p> -->
 
-  <p>Delete all this text and make these pages your own!</p>
+  <h1>Episodes</h1>
+  <p>
+  </p>
+  <ul>
+  <% gameOfThronesEpisodes.forEach(episode => { %>
+    <h3>
+   <%= episode.name %>
+   </h3>
+   <li>
+  <%= `S0${episode.season}E0${episode.number}` %> 
+</li>
+  <br>
+  <img src="<%= episode.image.medium %>"
+<p>
+</p>
+<p> <%- episode.summary %> </p>
+</li>
+  <% }); %>
+  </ul>
 </section>
 
 <%- include("../partials/footer.ejs") %>

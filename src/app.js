@@ -6,12 +6,10 @@ const { gameOfThronesEpisodes } = require("./data/gameOfThronesData");
  @typedef {import('./data/episodeType').Episode} Episode
 */
 
-//You can delete this once you see the episodes have loaded ok.
-summariseEpisodesToConsole(gameOfThronesEpisodes);
+console.log(gameOfThronesEpisodes);
 
-//configure the server's route handlers
 app.get("/", (req, res) => {
-    res.render("pages/index");
+    res.render("pages/index", { gameOfThronesEpisodes });
 });
 
 app.get("/db-test", async (req, res) => {
@@ -47,4 +45,3 @@ app.listen(PORT_NUMBER, () => {
         `Your express app started listening on ${PORT_NUMBER} at ${new Date()}`,
     );
 });
-

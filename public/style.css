@@ -1,0 +1,16 @@
+/* starting note: mvp.css may also be loaded by your header partial */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+footer {
+    margin-top: 2rem;
+    border-top: 4px solid #888;
+    text-align: center;
+}

@@ -1,0 +1,33 @@
+{
+    "name": "academy-express-tv-shows-project-starter",
+    "version": "1.0.0",
+    "main": "src/app.js",
+    "author": "nbogie",
+    "license": "MIT",
+    "scripts": {
+        "start": "node src/app.js",
+        "start:dev": "nodemon src/app.js --ext 'js ejs html json css'",
+        "test": "jest --verbose",
+        "lint": "yarn eslint .",
+        "format": "yarn prettier --write .",
+        "format:check": "yarn prettier ."
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "dotenv": "^16.4.1",
+        "ejs": "^3.1.9",
+        "express": "^4.18.2",
+        "express-session": "^1.17.3",
+        "morgan": "^1.10.0",
+        "pg": "^8.11.3"
+    },
+    "devDependencies": {
+        "@types/jest": "^29.5.11",
+        "connect-livereload": "^0.6.1",
+        "eslint": "^8.56.0",
+        "jest": "^29.7.0",
+        "livereload": "^0.9.3",
+        "nodemon": "^3.0.3",
+        "prettier": "^3.2.4"
+    }
+}

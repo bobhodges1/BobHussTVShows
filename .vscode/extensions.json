@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "dbaeumer.vscode-eslint",
+        "DigitalBrainstem.javascript-ejs-support",
+        "esbenp.prettier-vscode",
+        "j69.ejs-beautify",
+        "sleistner.vscode-fileutils"
+    ]
+}

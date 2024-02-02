@@ -1,15 +1,17 @@
 const { app } = require("./support/setupExpress");
 const { query } = require("./support/db");
 const { gameOfThronesEpisodes } = require("./data/gameOfThronesData");
+const { createPaddedEpisode } = require("./functions");
 
 /** 
  @typedef {import('./data/episodeType').Episode} Episode
 */
 
-console.log(gameOfThronesEpisodes);
-
 app.get("/", (req, res) => {
-    res.render("pages/index", { gameOfThronesEpisodes });
+    res.render("pages/index", {
+            gameOfThronesEpisodes,
+            createPaddedEpisode,
+        });
 });
 
 app.get("/db-test", async (req, res) => {
@@ -26,15 +28,7 @@ app.get("/db-test", async (req, res) => {
     }
 });
 
-/**
- * You can delete this function.  It demonstrates the use of the Episode type in JSDoc.
- * @param {Episode[]} episodes
- * @returns void
- */
-function summariseEpisodesToConsole(episodes) {
-    console.log(`Loaded ${episodes.length} episodes`);
-    console.log("The first episode has name of " + episodes[0].name);
-}
+
 
 // use the environment variable PORT, or 3000 as a fallback if it is undefined
 const PORT_NUMBER = process.env.PORT ?? 3000;

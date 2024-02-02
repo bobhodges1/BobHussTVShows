@@ -1767,3 +1767,11 @@ const gameOfThronesEpisodes = [
 ];
 
 module.exports = { gameOfThronesEpisodes };
+
+
+const selectedproperties = gameOfThronesEpisodes.map((episode) => ({
+    name: gameOfThronesEpisodes.name,
+    season: gameOfThronesEpisodes.season,
+    episode: gameOfThronesEpisodes.number,
+}));
+console.log(selectedproperties);

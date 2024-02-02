@@ -1,7 +1,4 @@
 <%- include("../partials/header.ejs", {title: "Game of Thrones Episodes"}) %>
-
-
-
 <section>
   <!-- <p><a href="/db-test">Clicking this link will test to see if your db connection is ok</a></p> -->
 
@@ -9,20 +6,20 @@
   <p>
   </p>
   <ul>
-  <% gameOfThronesEpisodes.forEach(episode => { %>
+    <% gameOfThronesEpisodes.forEach(episode => { %>
     <h3>
-   <%= episode.name %>
-   </h3>
-   <li>
-  <%= `S0${episode.season}E0${episode.number}` %> 
-</li>
-  <br>
-  <img src="<%= episode.image.medium %>"
-<p>
-</p>
-<p> <%- episode.summary %> </p>
-</li>
-  <% }); %>
+      <%= episode.name %>
+      </h3>
+      <li>
+        <%= createPaddedEpisode(episode.season,episode.number) %>
+        </li>
+        <br>
+    <img src="<%= episode.image.medium %>">
+    <p>
+    </p>
+    <p> <%- episode.summary %> </p>
+    </li>
+    <% }); %>
   </ul>
 </section>
 

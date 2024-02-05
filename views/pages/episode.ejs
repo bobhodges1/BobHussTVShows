@@ -1,0 +1,24 @@
+
+
+<nav>
+<p> <a href="../">Return to show page</a></p>
+
+</nav>
+
+
+
+<h1>Game of Thrones</h1>
+<h2><%= episodeTitle %></h2>
+<img src="<%= episodeImage %>" >
+<p><%= `Runtime: ${episodeRuntime} minutes` %></p>
+<p> <%= `Airdate: ${episodeAirdate}` %> </p>
+<p> <%= "Average rating: " + episodeAvgRating %> </p>
+
+
+
+
+
+
+
+
+<%- include("../partials/footer.ejs") %>

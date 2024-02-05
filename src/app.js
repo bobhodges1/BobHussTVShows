@@ -1,10 +1,14 @@
 const { app } = require("./support/setupExpress");
 const { query } = require("./support/db");
 const { gameOfThronesEpisodes } = require("./data/gameOfThronesData");
+const { createPaddedEpisode } = require("./functions");
 
 //This static page will be changed to dynamic
 app.get("/", (req, res) => {
-    res.render("pages/index", { gameOfThronesEpisodes });
+        res.render("pages/index", {
+            gameOfThronesEpisodes,
+            createPaddedEpisode,
+        });
 });
 
 //Following line of code will need to be altered for dynamic shows

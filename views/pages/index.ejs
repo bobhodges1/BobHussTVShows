@@ -11,7 +11,7 @@
   <ul>
   <% gameOfThronesEpisodes.forEach(episode => { %>
     <h3>
-   <%= episode.name %>
+      <a href="./episode/<%=episode.id %>"> <%= episode.name %></a>
    </h3>
    <li>
   <%= `S0${episode.season}E0${episode.number}` %> 
@@ -22,7 +22,11 @@
 </p>
 <p> <%- episode.summary %> </p>
 </li>
-  <% }); %>
+
+
+
+
+        <% }); %>
   </ul>
 </section>
 

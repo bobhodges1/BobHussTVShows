@@ -1,10 +1,18 @@
-/**
- * Returns a random d6 die roll from 1-6.
- * @returns {number} a number between 1 and 6 inclusive, representing a d6 die roll.
- */
-function randomDieRoll() {
-    const n = 1 + Math.floor(Math.random() * 6);
-    return n;
+// exports.createEpisodeIndex = createEpisodeIndex;
+
+const { gameOfThronesEpisodes } = require("./data/gameOfThronesData.js");
+
+// Create a pure function to generate the episode code without padStart
+function generateEpisodeCode(seasonNumber, episodeNumber) {
+    // Function to manually add zero-padding
+    const zeroPad = (number) => (number < 10 ? `0${number}` : `${number}`);
+
+    const paddedSeason = zeroPad(seasonNumber);
+    const paddedEpisode = zeroPad(episodeNumber);
+
+    return `S${paddedSeason}E${paddedEpisode}`;
 }
 
-exports.randomDieRoll = randomDieRoll;
+// Example usage of the function with string inputs
+const episodeCode = generateEpisodeCode("2", "7");
+console.log(episodeCode); // Outputs: S02E07

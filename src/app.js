@@ -2,14 +2,26 @@ const { app } = require("./support/setupExpress");
 const { query } = require("./support/db");
 const { gameOfThronesEpisodes } = require("./data/gameOfThronesData");
 
-/** 
- @typedef {import('./data/episodeType').Episode} Episode
-*/
-
-console.log(gameOfThronesEpisodes);
-
+//This static page will be changed to dynamic
 app.get("/", (req, res) => {
     res.render("pages/index", { gameOfThronesEpisodes });
+});
+
+//Following line of code will need to be altered for dynamic shows
+app.get("/episode/:id", (req, res) => {
+    const episodeId = req.params.id;
+    const episodeData = gameOfThronesEpisodes.find(
+        (episode) => episode.id == episodeId,
+    );
+    res.render("pages/episode", {
+        gameOfThronesEpisodes,
+        episodeId,
+        episodeTitle: episodeData.name,
+        episodeRuntime: episodeData.runtime,
+        episodeAirdate: episodeData.airdate,
+        episodeAvgRating: episodeData.rating.average,
+        episodeImage: episodeData.image.original,
+    });
 });
 
 app.get("/db-test", async (req, res) => {
@@ -25,16 +37,6 @@ app.get("/db-test", async (req, res) => {
         );
     }
 });
-
-/**
- * You can delete this function.  It demonstrates the use of the Episode type in JSDoc.
- * @param {Episode[]} episodes
- * @returns void
- */
-function summariseEpisodesToConsole(episodes) {
-    console.log(`Loaded ${episodes.length} episodes`);
-    console.log("The first episode has name of " + episodes[0].name);
-}
 
 // use the environment variable PORT, or 3000 as a fallback if it is undefined
 const PORT_NUMBER = process.env.PORT ?? 3000;

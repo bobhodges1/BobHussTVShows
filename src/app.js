@@ -1,17 +1,27 @@
 const { app } = require("./support/setupExpress");
 const { query } = require("./support/db");
 const { gameOfThronesEpisodes } = require("./data/gameOfThronesData");
-const { createPaddedEpisode } = require("./functions");
 
-/** 
- @typedef {import('./data/episodeType').Episode} Episode
-*/
-
+//This static page will be changed to dynamic
 app.get("/", (req, res) => {
-    res.render("pages/index", {
-            gameOfThronesEpisodes,
-            createPaddedEpisode,
-        });
+    res.render("pages/index", { gameOfThronesEpisodes });
+});
+
+//Following line of code will need to be altered for dynamic shows
+app.get("/episode/:id", (req, res) => {
+    const episodeId = req.params.id;
+    const episodeData = gameOfThronesEpisodes.find(
+        (episode) => episode.id == episodeId,
+    );
+    res.render("pages/episode", {
+        gameOfThronesEpisodes,
+        episodeId,
+        episodeTitle: episodeData.name,
+        episodeRuntime: episodeData.runtime,
+        episodeAirdate: episodeData.airdate,
+        episodeAvgRating: episodeData.rating.average,
+        episodeImage: episodeData.image.original,
+    });
 });
 
 app.get("/db-test", async (req, res) => {
@@ -27,8 +37,6 @@ app.get("/db-test", async (req, res) => {
         );
     }
 });
-
-
 
 // use the environment variable PORT, or 3000 as a fallback if it is undefined
 const PORT_NUMBER = process.env.PORT ?? 3000;

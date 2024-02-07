@@ -13,4 +13,17 @@ function findEpisodeId(episodeId) {
     return episodeData;
 }
 
-module.exports = { createPaddedEpisode, findEpisodeId };
+function filterShowArray(tvShow, searchedWord) {
+    let filteredArray = [];
+    for (let episode of tvShow) {
+        if (
+            episode.name.includes(searchedWord) ||
+            episode.summary.includes(searchedWord)
+        ) {
+            filteredArray.push(episode);
+        } else filteredArray = tvShow;
+    }
+    return filteredArray;
+}
+
+module.exports = { createPaddedEpisode, findEpisodeId, filterShowArray };

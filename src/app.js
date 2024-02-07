@@ -1,18 +1,37 @@
 const { app } = require("./support/setupExpress");
 const { query } = require("./support/db");
 const { gameOfThronesEpisodes } = require("./data/gameOfThronesData");
-const { createPaddedEpisode } = require("./functions");
-const { findEpisodeId } = require("./functions");
+const {
+    createPaddedEpisode,
+    findEpisodeId,
+    filterShowArray,
+} = require("./functions");
 
 //This static page will be changed to dynamic
 app.get("/", (req, res) => {
     res.render("pages/index", {
         gameOfThronesEpisodes,
+
         createPaddedEpisode,
     });
 });
 
-//Following line of code will need to be altered for dynamic shows
+app.get("/tvShow", (req, res) => {
+    res.render("pages/tvShow", {
+        gameOfThronesEpisodes,
+        createPaddedEpisode,
+    });
+});
+
+app.get("/search", (req, res) => {
+    const searchedWord = req.query.searchedWord;
+    const filteredShow = filterShowArray(gameOfThronesEpisodes, searchedWord);
+    res.render("pages/tvShow", {
+        gameOfThronesEpisodes: filteredShow,
+        createPaddedEpisode,
+    });
+});
+
 app.get("/episode/:id", (req, res) => {
     const episodeId = req.params.id;
     const episodeData = findEpisodeId(episodeId);

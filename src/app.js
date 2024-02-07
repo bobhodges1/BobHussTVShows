@@ -11,7 +11,6 @@ const {
 app.get("/", (req, res) => {
     res.render("pages/index", {
         gameOfThronesEpisodes,
-
         createPaddedEpisode,
     });
 });
@@ -24,10 +23,11 @@ app.get("/tvShow", (req, res) => {
 });
 
 app.get("/search", (req, res) => {
-    const searchedWord = req.query.searchedWord;
+    const searchedWord = req.query.searchTerm;
     const filteredShow = filterShowArray(gameOfThronesEpisodes, searchedWord);
-    res.render("pages/tvShow", {
+    res.render("pages/searchResults", {
         gameOfThronesEpisodes: filteredShow,
+        searchedWord: searchedWord,
         createPaddedEpisode,
     });
 });

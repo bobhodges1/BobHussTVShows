@@ -1,4 +1,4 @@
-const { createPaddedEpisode } = require("./functions");
+const { createPaddedEpisode, filterShowArray } = require("./functions");
 
 test("makeEpisodeIndex", () => {
     expect(createPaddedEpisode(1, 1)).toEqual("S01E01");

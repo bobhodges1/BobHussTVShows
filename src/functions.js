@@ -14,16 +14,15 @@ function findEpisodeId(episodeId) {
 }
 
 function filterShowArray(tvShow, searchedWord) {
-    let filteredArray = [];
-    for (let episode of tvShow) {
-        if (
-            episode.name.includes(searchedWord) ||
-            episode.summary.includes(searchedWord)
-        ) {
-            filteredArray.push(episode);
-        } else filteredArray = tvShow;
-    }
-    return filteredArray;
+    debugger;
+    const queryWord = searchedWord.toLowerCase();
+    return tvShow.filter((episode) => {
+        const name = episode.name.toLowerCase();
+        const summary = episode.summary.toLowerCase();
+        return name.includes(queryWord) || summary.includes(queryWord);
+    }); 
 }
 
+
+console.log(filterShowArray(gameOfThronesEpisodes, "winter"));
 module.exports = { createPaddedEpisode, findEpisodeId, filterShowArray };

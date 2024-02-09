@@ -14,13 +14,12 @@ function findEpisodeId(episodeId) {
 }
 
 function filterShowArray(tvShow, searchedWord) {
-    debugger;
     const queryWord = searchedWord.toLowerCase();
     return tvShow.filter((episode) => {
         const name = episode.name.toLowerCase();
         const summary = episode.summary.toLowerCase();
         return name.includes(queryWord) || summary.includes(queryWord);
-    }); 
+    });
 }
 
 

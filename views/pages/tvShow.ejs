@@ -1,0 +1,33 @@
+<%- include("../partials/header.ejs", {title: "Nathan For You Episodes"}) %>
+<section>
+  <form action="/search" method="get">
+    <input type="text" name="searchTerm" placeholder="search by keyword...">
+    <button type="submit">Submit</button>
+  </form>
+</section>
+<section>
+  <h1>Episodes</h1>
+  <p>
+  </p>
+  <ul>
+    <% gameOfThronesEpisodes.forEach(episode => { %>
+    <h3>
+      <a href="./episode/<%=episode.id %>"> <%= episode.name %></a>
+    </h3>
+    <li>
+      <%= createPaddedEpisode(episode.season,episode.number) %>
+    </li>
+    <br>
+    <img src="<%= episode.image.medium %>" <p>
+    </p>
+    <p> <%- episode.summary %> </p>
+    </li>
+
+
+
+
+    <% }); %>
+  </ul>
+</section>
+
+<%- include("../partials/footer.ejs") %>

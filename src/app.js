@@ -1,17 +1,53 @@
 const { app } = require("./support/setupExpress");
 const { query } = require("./support/db");
 const { gameOfThronesEpisodes } = require("./data/gameOfThronesData");
+const {
+    createPaddedEpisode,
+    findEpisodeId,
+    filterShowArray,
+} = require("./functions");
 
-/** 
- @typedef {import('./data/episodeType').Episode} Episode
-*/
-
-//You can delete this once you see the episodes have loaded ok.
-summariseEpisodesToConsole(gameOfThronesEpisodes);
-
-//configure the server's route handlers
+//This static page will be changed to dynamic
 app.get("/", (req, res) => {
-    res.render("pages/index");
+    res.render("pages/index", {
+        gameOfThronesEpisodes,
+        createPaddedEpisode,
+    });
+});
+
+app.get("/tvShow", (req, res) => {
+    res.render("pages/tvShow", {
+        gameOfThronesEpisodes,
+        createPaddedEpisode,
+    });
+});
+
+app.get("/search", (req, res) => {
+    const searchedWord = req.query.searchTerm;
+    const filteredShow = filterShowArray(gameOfThronesEpisodes, searchedWord);
+    res.render("pages/searchResults", {
+        gameOfThronesEpisodes: filteredShow,
+        searchedWord: searchedWord,
+        createPaddedEpisode,
+    });
+});
+
+app.get("/episode/:id", (req, res) => {
+    const episodeId = req.params.id;
+    const episodeData = findEpisodeId(episodeId);
+    res.render("pages/episode", {
+        gameOfThronesEpisodes,
+        createPaddedEpisode,
+        episodeId,
+        episodeSeason: episodeData.season,
+        episodeNumber: episodeData.number,
+        episodeSummary: episodeData.summary,
+        episodeTitle: episodeData.name,
+        episodeRuntime: episodeData.runtime,
+        episodeAirdate: episodeData.airdate,
+        episodeAvgRating: episodeData.rating.average,
+        episodeImage: episodeData.image.original,
+    });
 });
 
 app.get("/db-test", async (req, res) => {
@@ -27,16 +63,6 @@ app.get("/db-test", async (req, res) => {
         );
     }
 });
-
-/**
- * You can delete this function.  It demonstrates the use of the Episode type in JSDoc.
- * @param {Episode[]} episodes
- * @returns void
- */
-function summariseEpisodesToConsole(episodes) {
-    console.log(`Loaded ${episodes.length} episodes`);
-    console.log("The first episode has name of " + episodes[0].name);
-}
 
 // use the environment variable PORT, or 3000 as a fallback if it is undefined
 const PORT_NUMBER = process.env.PORT ?? 3000;
